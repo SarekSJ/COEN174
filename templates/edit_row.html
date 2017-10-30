@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Row</title>
+</head>
+<body>
+<form action="{{url_for('edit_row', id=row.id) }}" method="POST">
+    <div>
+    <input type="school" name="school" placeholder="{{row.school}}">
+    <input type="school_course" name="school_course" placeholder="{{row.school_course}}">
+    <input type="scu_course" name="scu_course" placeholder="{{row.scu_course}}">
+    <input type="determination" name="determination" placeholder="{{row.determination}}">
+    <input type="advisor" name="advisor" placeholder="{{row.advisor}}">
+    <input type="submit" value="Finish update">
+    </div>
+</form>
+
+</body>
+</html>

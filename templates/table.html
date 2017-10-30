@@ -13,6 +13,7 @@
             <th>SCU Course</th>
             <th>Determination</th>
             <th>Advisor</th>
+            <th>Date</th>
         </tr>
         {% for row in items %}
         <tr>
@@ -22,8 +23,14 @@
               <td>{{ row.scu_course}}</td>
               <td>{{ row.determination }}</td>
               <td>{{ row.advisor}}</td>
+              <td>{{ row.date }}  </td>
 	      {% if isLoggedIn %}
-              <td><input type="button" value="Delete Row"></td>
+              <form method="post" action="{{url_for('delete_row', id=row.id) }}">
+              <td><input type="submit" value="Delete Row"></td>
+              </form>
+              <form method="post" action="{{url_for('display_edit_page', id=row.id) }}">
+                  <td><input type="submit" value="Edit Row"></td>
+              </form>
 	      {% endif %}
         </tr>
 
