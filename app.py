@@ -13,10 +13,14 @@ s = Session()
 @app.route('/')
 def home():
     if not session.get('logged_in'):
-        return render_template('login.html')
+        isLoggedIn = True
     else:
-        return table_screen()
-        # return "Hello Boss! <a href='/logout'>Logout</a>"
+        isLoggedIn = False
+    return table_screen(isLoggedIn)
+
+@app.route('/login_screen', methods=['POST'])
+def show_login_screen():
+    return render_template('login.html')
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
@@ -32,7 +36,7 @@ def do_admin_login():
     return home()
 
 @app.route('/add_row', methods=['POST'])
-def add_row():
+def add_row(isLoggedIn=False):
     POST_SCHOOL = str(request.form['school'])
     POST_SCHOOL_COURSE = str(request.form['school_course'])
     POST_SCU_COURSE = str(request.form['scu_course'])
@@ -41,7 +45,7 @@ def add_row():
 
     s.add(Course(POST_SCHOOL, POST_SCHOOL_COURSE, POST_SCU_COURSE, POST_DETERMINATION, POST_ADVISOR, None))
     s.commit()
-    return table_screen()
+    return table_screen(isLoggedIn)
 
 @app.route("/logout")
 def logut():
@@ -50,9 +54,13 @@ def logut():
 
 
 @app.route('/table')
-def table_screen():
+def table_screen(isLoggedIn=False):
+    if not session.get('logged_in'):
+        isLoggedIn = False
+    else:
+        isLoggedIn = True
     items = s.query(Course).all();
-    return render_template('table.html', items=items)
+    return render_template('table.html', items=items, isLoggedIn=isLoggedIn)
 
 
 if __name__ == '__main__':

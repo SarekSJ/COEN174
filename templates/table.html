@@ -36,6 +36,14 @@
     <input type="advisor" name="advisor" placeholder="Advisor?">
     <input type="submit" value="Add row">
     </form>
-
+    {% if isLoggedIn %}
+    <form action="/logout">
+    <input type="submit" name="auth" value="Log Out" action="/logout">
+    </form>
+    {% else %}
+    <form action="/login_screen" method="POST">
+    <input type="submit" value="Log In as Admin" action="/login" method="POST">
+    </form>
+    {% endif %}
 </body>
 </html>
