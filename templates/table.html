@@ -22,11 +22,14 @@
               <td>{{ row.scu_course}}</td>
               <td>{{ row.determination }}</td>
               <td>{{ row.advisor}}</td>
+	      {% if isLoggedIn %}
               <td><input type="button" value="Delete Row"></td>
+	      {% endif %}
         </tr>
 
         {% endfor %}
     </table>
+    {% if isLoggedIn %}
     <form action="/add_row" method="POST">
 
     <input type="school" name="school" placeholder="School">
@@ -36,7 +39,7 @@
     <input type="advisor" name="advisor" placeholder="Advisor?">
     <input type="submit" value="Add row">
     </form>
-    {% if isLoggedIn %}
+
     <form action="/logout">
     <input type="submit" name="auth" value="Log Out" action="/logout">
     </form>
