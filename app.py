@@ -72,6 +72,15 @@ def edit_row(id, isLoggedIn=false):
     s.commit()
     return table_screen(isLoggedIn)
 
+@app.route("/add_user", methods=['POST'])
+def add_user():
+    POST_USERNAME = str(request.form['username'])
+    POST_PASSWORD = str(request.form['password'])
+
+    s.add(User(POST_USERNAME, POST_PASSWORD))
+    s.commit()
+    session['logged_in'] = True
+    return table_screen(True)
 
 @app.route("/display_edit_page/<int:id>", methods=['POST'])
 def display_edit_page(id):

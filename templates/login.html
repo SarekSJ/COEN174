@@ -9,5 +9,12 @@
         <input type="submit" value="Log in">
     </div>
 </form>
+<form action="/add_user" method="POST">
+    <p>New admin? Add your credentials here: </p>
+    <input type="username" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+    <input type="submit" value="Create User">
+</form>
+
 {% endif %}
 {% endblock %}
