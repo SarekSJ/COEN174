@@ -7,11 +7,11 @@
 <body>
 <form action="{{url_for('edit_row', id=row.id) }}" method="POST">
     <div>
-    <input type="school" name="school" placeholder="{{row.school}}">
-    <input type="school_course" name="school_course" placeholder="{{row.school_course}}">
-    <input type="scu_course" name="scu_course" placeholder="{{row.scu_course}}">
-    <input type="determination" name="determination" placeholder="{{row.determination}}">
-    <input type="advisor" name="advisor" placeholder="{{row.advisor}}">
+    <input type="school" name="school" value="{{row.school}}">
+    <input type="school_course" name="school_course" value="{{row.school_course}}">
+    <input type="scu_course" name="scu_course" value="{{row.scu_course}}">
+    <input type="determination" name="determination" value="{{row.determination}}">
+    <input type="advisor" name="advisor" value="{{row.advisor}}">
     <input type="submit" value="Finish update">
     </div>
 </form>
