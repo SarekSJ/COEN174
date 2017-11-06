@@ -1,9 +1,9 @@
 from flask import Flask, flash, redirect, render_template, request, session, abort
 from sqlalchemy.orm import relationship, backref, sessionmaker
 from tabledef import *
-from courses_table import *
 from datetime import datetime
 import os
+from pprint import pprint
 
 app = Flask(__name__)
 
@@ -31,6 +31,7 @@ def do_admin_login():
     query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]))
     result = query.first()
     if result:
+        session['username'] = POST_USERNAME
         session['logged_in'] = True
     else:
         flash('wrong password!')
@@ -42,9 +43,9 @@ def add_row(isLoggedIn=False):
     POST_SCHOOL_COURSE = str(request.form['school_course'])
     POST_SCU_COURSE = str(request.form['scu_course'])
     POST_DETERMINATION = str(request.form['determination'])
-    POST_ADVISOR = str(request.form['advisor'])
+    # POST_ADVISOR = str(request.form['advisor'])
 
-    s.add(Course(POST_SCHOOL, POST_SCHOOL_COURSE, POST_SCU_COURSE, POST_DETERMINATION, POST_ADVISOR, datetime.now()))
+    s.add(Course(POST_SCHOOL, POST_SCHOOL_COURSE, POST_SCU_COURSE, POST_DETERMINATION, session['username'], datetime.now()))
     s.commit()
     return table_screen(isLoggedIn)
 
@@ -85,7 +86,10 @@ def add_user():
 @app.route("/display_edit_page/<int:id>", methods=['POST'])
 def display_edit_page(id):
     row = s.query(Course).filter(Course.id == id).one()
-    return render_template('edit_row.html', row=row)
+    advisors = s.query(User).all()
+    # for advisor in advisors:
+    #     print(advisor['username'])
+    return render_template('edit_row.html', row=row, advisors=advisors)
 
 @app.route('/table')
 def table_screen(isLoggedIn=False):
@@ -95,7 +99,6 @@ def table_screen(isLoggedIn=False):
         isLoggedIn = True
     items = s.query(Course).all();
     return render_template('table.html', items=items, isLoggedIn=isLoggedIn)
-
 
 if __name__ == '__main__':
     app.secret_key = os.urandom(12)

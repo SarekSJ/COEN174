@@ -10,8 +10,16 @@
     <input type="school" name="school" value="{{row.school}}">
     <input type="school_course" name="school_course" value="{{row.school_course}}">
     <input type="scu_course" name="scu_course" value="{{row.scu_course}}">
-    <input type="determination" name="determination" value="{{row.determination}}">
-    <input type="advisor" name="advisor" value="{{row.advisor}}">
+    <div>
+    <input type="radio" name="determination" id="approved" value="Approved"> Approved <br>
+    <input type="radio" name="determination" id="denied" value="Denied"> Denied <br>
+    </div>
+
+    <select name="advisor" method="GET">
+        {% for advisor in advisors %}
+        <option value= "{{advisor.username}}" default="row.advisor" SELECTED>{{advisor.username}}</option>"
+        {% endfor %}
+    </select>
     <input type="submit" value="Finish update">
     </div>
 </form>
