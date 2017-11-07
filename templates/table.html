@@ -7,7 +7,6 @@
 <body>
     <table>
         <tr>
-            <th>ID</th>
             <th>School</th>
             <th>School Course</th>
             <th>SCU Course</th>
@@ -17,14 +16,14 @@
         </tr>
         {% for row in items %}
         <tr>
-              <td>{{ row.id }}</td>
               <td>{{ row.school }}</td>
               <td>{{ row.school_course }}</td>
               <td>{{ row.scu_course}}</td>
               <td>{{ row.determination }}</td>
               <td>{{ row.advisor}}</td>
               <td>{{ row.date }}  </td>
-	      {% if isLoggedIn %}
+	      {% if isLoggedIn and row.advisor == session['username'] %}
+
               <form method="post" action="{{url_for('delete_row', id=row.id) }}">
               <td><input type="submit" value="Delete Row"></td>
               </form>
@@ -40,9 +39,11 @@
     <form action="/add_row" method="POST">
 
     <input type="school" name="school" placeholder="School">
+    <input type="country" name="country" placeholder="Country">
     <input type="school_course" name="school_course" placeholder="School's Course">
     <input type="scu_course" name="scu_course" placeholder="SCU Course">
     <input type="determination" name="determination" placeholder="Approved or Denied?">
+    <input type="description" name="description" placeholder="Please explain your rationale here.">
     <input type="submit" value="Add row">
     </form>
 

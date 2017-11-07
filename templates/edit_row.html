@@ -11,8 +11,14 @@
     <input type="school_course" name="school_course" value="{{row.school_course}}">
     <input type="scu_course" name="scu_course" value="{{row.scu_course}}">
     <div>
-    <input type="radio" name="determination" id="approved" value="Approved"> Approved <br>
-    <input type="radio" name="determination" id="denied" value="Denied"> Denied <br>
+        {% if row.determination == "Approved" %}
+            <input type="radio" name="determination" id="approved" value="Approved" checked> Approved <br>
+            <input type="radio" name="determination" id="denied" value="Denied"> Denied <br>
+        {% else %}
+            <input type="radio" name="determination" id="approved" value="Approved"> Approved <br>
+            <input type="radio" name="determination" id="denied" value="Denied" checked> Denied <br>
+        {% endif %}
+
     </div>
 
     <select name="advisor" method="GET">

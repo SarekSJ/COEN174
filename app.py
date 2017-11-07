@@ -40,12 +40,14 @@ def do_admin_login():
 @app.route('/add_row', methods=['POST'])
 def add_row(isLoggedIn=False):
     POST_SCHOOL = str(request.form['school'])
+    POST_COUNTRY = str(request.form['country'])
     POST_SCHOOL_COURSE = str(request.form['school_course'])
     POST_SCU_COURSE = str(request.form['scu_course'])
     POST_DETERMINATION = str(request.form['determination'])
+    POST_DESCRIPTION = str(request.form['description'])
     # POST_ADVISOR = str(request.form['advisor'])
 
-    s.add(Course(POST_SCHOOL, POST_SCHOOL_COURSE, POST_SCU_COURSE, POST_DETERMINATION, session['username'], datetime.now()))
+    s.add(Course(POST_SCHOOL, POST_COUNTRY,POST_SCHOOL_COURSE, POST_SCU_COURSE, POST_DETERMINATION, session['username'], datetime.now(), POST_DESCRIPTION))
     s.commit()
     return redirect(url_for('table_screen'))
 
