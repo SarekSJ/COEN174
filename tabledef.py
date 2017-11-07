@@ -34,7 +34,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String(80))
     password = Column(String(80))
-
+ 
     #----------------------------------------------------------------------
     def __init__(self, username, password):
         """"""
