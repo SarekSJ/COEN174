@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, request, session, abort
+from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
 from sqlalchemy.orm import relationship, backref, sessionmaker
 from tabledef import *
 from datetime import datetime
@@ -17,7 +17,7 @@ def home():
         isLoggedIn = True
     else:
         isLoggedIn = False
-    return table_screen(isLoggedIn)
+    return redirect(url_for('table_screen'))
 
 @app.route('/login_screen', methods=['POST'])
 def show_login_screen():
@@ -47,7 +47,7 @@ def add_row(isLoggedIn=False):
 
     s.add(Course(POST_SCHOOL, POST_SCHOOL_COURSE, POST_SCU_COURSE, POST_DETERMINATION, session['username'], datetime.now()))
     s.commit()
-    return table_screen(isLoggedIn)
+    return redirect(url_for('table_screen'))
 
 @app.route("/logout")
 def logut():
@@ -59,7 +59,7 @@ def logut():
 def delete_row(id, isLoggedIn=false):
     row = s.query(Course).filter(Course.id == id).delete()
     s.commit()
-    return table_screen(isLoggedIn)
+    return redirect(url_for('table_screen'))
 
 @app.route("/edit/<int:id>", methods=['POST'])
 def edit_row(id, isLoggedIn=false):
@@ -71,7 +71,7 @@ def edit_row(id, isLoggedIn=false):
 
     s.query(Course).filter(Course.id == id).update({"school": POST_SCHOOL, "school_course": POST_SCHOOL_COURSE, "scu_course": POST_SCU_COURSE, "determination": POST_DETERMINATION, "advisor": POST_ADVISOR})
     s.commit()
-    return table_screen(isLoggedIn)
+    return redirect(url_for('table_screen'))
 
 @app.route("/add_user", methods=['POST'])
 def add_user():
@@ -97,7 +97,7 @@ def table_screen(isLoggedIn=False):
         isLoggedIn = False
     else:
         isLoggedIn = True
-    items = s.query(Course).all();
+    items = s.query(Course).all()
     return render_template('table.html', items=items, isLoggedIn=isLoggedIn)
 
 if __name__ == '__main__':

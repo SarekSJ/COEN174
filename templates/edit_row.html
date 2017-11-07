@@ -19,6 +19,7 @@
         {% for advisor in advisors %}
         <option value= "{{advisor.username}}" default="row.advisor" SELECTED>{{advisor.username}}</option>"
         {% endfor %}
+        <option value= "{{row.advisor}}" SELECTED> Advisor</option>
     </select>
     <input type="submit" value="Finish update">
     </div>
