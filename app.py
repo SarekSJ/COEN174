@@ -83,6 +83,7 @@ def add_user():
     s.add(User(POST_USERNAME, POST_PASSWORD))
     s.commit()
     session['logged_in'] = True
+    session['username'] = POST_USERNAME
     return table_screen(True)
 
 @app.route("/display_edit_page/<int:id>", methods=['POST'])
