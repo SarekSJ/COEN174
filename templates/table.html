@@ -8,6 +8,7 @@
     <table>
         <tr>
             <th>School</th>
+            <th>Country</th>
             <th>School Course</th>
             <th>SCU Course</th>
             <th>Determination</th>
@@ -17,10 +18,12 @@
         {% for row in items %}
         <tr>
               <td>{{ row.school }}</td>
+              <td>{{ row.country}}</td>
               <td>{{ row.school_course }}</td>
               <td>{{ row.scu_course}}</td>
               <td>{{ row.determination }}</td>
               <td>{{ row.advisor}}</td>
+              <td>{{ row.description }}</td>
               <td>{{ row.date }}  </td>
 	      {% if isLoggedIn and row.advisor == session['username'] %}
 
