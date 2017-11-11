@@ -6,64 +6,24 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
-
 table td, #customers th {
     border: 1px solid #ddd;
     padding: 8px;
 }
-
 table tr:nth-child(even){background-color: #f2f2f2;}
-
 table tr:hover {background-color: #ddd;}
-
 table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: red;
+    background-color: #4CAF50;
     color: white;
 }
-<head>
-<style>
-
-li {
-    float: left;
-    border-right:1px solid white;
-}
-
-li:last-child {
-    border-right: none;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
 </style>
-</head>
-<body>
-
-<ul>
-  <li><a class="static">SCU Course Equivalency System</a></li>
-  <!--<li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>-->
-  {% if isLoggedIn %}
-  <li style="float:right"><a href="#about">Logout></li>
-  {% else %}
-  <li style="float:right"><a href="#about">Login/li>
-  {% endif %}
-	  
-</ul>
-
-</body>
-<!--</head>
+<head>
     <meta charset="UTF-8">
     <title>Table</title>
-</head> -->
+</head>
 <body>
     <table>
         <tr>
@@ -73,7 +33,7 @@ li a {
             <th>SCU Course</th>
             <th>Determination</th>
             <th>Advisor</th>
-            <th>Description</th>
+            <th>Determination</th>
             <th>Date</th>
         </tr>
         {% for row in items %}
