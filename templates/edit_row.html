@@ -27,8 +27,6 @@ p {
             <input type="radio" name="determination" id="denied" value="Denied" checked> Denied <br>
         {% endif %}
 
-    </div>
-
     <select name="advisor" method="GET">
         {% for advisor in advisors %}
         <option value= "{{advisor.username}}" default="row.advisor" SELECTED>{{advisor.username}}</option>"
@@ -36,6 +34,7 @@ p {
         <option value= "{{row.advisor}}" SELECTED> Advisor</option>
     </select>
     <input type="submit" value="Finish update">
+    </div>
     </div>
 </form>
 
