@@ -64,6 +64,14 @@ table th {
         {% endfor %}
     </table>
     {% if isLoggedIn %}
+	<form action="/logout">
+    	    <input type="submit" name="auth" value="Log Out" action="/logout">
+        </form>
+    	{% else %}
+   	<form action="/login_screen" method="POST">
+             <input type="submit" value="Log In as Admin" action="/login" method="POST">
+	</form>
+	
     <form action="/add_row" method="POST">
 
     <input type="school" name="school" placeholder="School">
@@ -71,18 +79,10 @@ table th {
     <input type="school_course" name="school_course" placeholder="School's Course">
     <input type="scu_course" name="scu_course" placeholder="SCU Course">
     <input type="determination" name="determination" placeholder="Approved or Denied?">
-    <input type="radio" name="determination" id="approved" value="Approved" checked> Approved <br>
-    <input type="radio" name="determination" id="denied" value="Denied"> Denied <br>
+    <!-- <input type="radio" name="determination" id="approved" value="Approved" checked> Approved <br>
+    //<input type="radio" name="determination" id="denied" value="Denied"> Denied <br> -->
     <input type="description" name="description" placeholder="Please explain your rationale here.">
     <input type="submit" value="Add row">
-    </form>
-
-    <form action="/logout">
-    <input type="submit" name="auth" value="Log Out" action="/logout">
-    </form>
-    {% else %}
-    <form action="/login_screen" method="POST">
-    <input type="submit" value="Log In as Admin" action="/login" method="POST">
     </form>
     {% endif %}
 </body>
