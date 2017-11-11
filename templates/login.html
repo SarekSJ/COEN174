@@ -4,6 +4,11 @@ p {
     font-size:25px;
     text-align:center;
 }
+h10 {
+    font-family: verdana;
+    font-size: 60px;
+    text-align: left;
+}
 h1 {
     text-align:center;
     color: black;
@@ -67,6 +72,7 @@ div{
     
 </style>
 {% block body %}
+<h10> SCU Course Equivalency System </h10>
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
