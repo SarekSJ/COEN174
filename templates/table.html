@@ -30,12 +30,12 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: red;
 }
 
 li {
     float: left;
-    border-right:1px solid #bbb;
+    border-right:1px solid white;
 }
 
 li:last-child {
@@ -55,16 +55,16 @@ li a:hover:not(.active) {
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: gray;
 }
 </style>
 </head>
 <body>
 
 <ul>
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
+  <li><a class="static">SCU Course Equivalency System</a></li>
+  <!--<li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>-->
   {% if isLoggedIn %}
   <li style="float:right"><a href="#about">Logout></li>
   {% else %}
