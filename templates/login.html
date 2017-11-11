@@ -5,7 +5,7 @@ p {
     text-align:center;
     }   
 body {
-    background-color: #80000;
+    background-color: #800000;
 } 
 h10 {
     font-family: verdana;
@@ -74,7 +74,7 @@ div{
 }
     
 </style>
-{% block body %}
+<body>
 <h10> SCU Course Equivalency System </h10>
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
@@ -95,4 +95,4 @@ div{
 </form>
 
 {% endif %}
-{% endblock %}
+</body>
