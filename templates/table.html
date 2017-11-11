@@ -19,13 +19,17 @@ table th {
     background-color: #4CAF50;
     color: white;
 }
+p {
+    font: Helvetica;
+    test-size: 100px;
+}
 </style>
 <?php $isLoggedIn = (isset($_SESSION["staffId"]) && $_SESSION["staffId"] != NULL) ? true : false; ?>
 <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
     <!--navbar settings-->
     <div class="container-fluid">
         <div class="navbar-header">
-		<p> SCU Coure Equivalency System </p>
+		<p> SCU Course Equivalency System </p>
             
             {% if isLoggedIn %}
                 <a class="navbar-brand">
