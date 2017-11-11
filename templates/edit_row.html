@@ -1,10 +1,18 @@
 <!DOCTYPE html>
+<style>
+h10 {
+    font-family: verdana;
+    font-size: 60px;
+    text-align: left;
+}
+</style>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Edit Row</title>
 </head>
 <body>
+    <p> SCU Course Equivalency System </p>
 <form action="{{url_for('edit_row', id=row.id) }}" method="POST">
     <div>
     <input type="school" name="school" value="{{row.school}}">
