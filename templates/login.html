@@ -40,19 +40,25 @@ h6 {
     font-family: verdana;
     font-size:15px;
 }
+h7 {
+    text-align:center;
+    color: black;
+    font-family: verdana;
+    font-size:15px;
+}    
 </style>
 {% block body %}
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
-<p1>Login</p1>
+<p>Login</p>
 <form action="/login" method="POST">
         <h1><input type="username" name="Username" placeholder="Username"></h1>
         <h2><input type="password" name="Password" placeholder="Password"></h2>
         <h3><input type="submit" value="Log in"></h3>
 </form>
 <form action="/add_user" method="POST">
-    <p>New admin? Add your credentials here: </p>
+    <h7>New admin? Add your credentials here: </h7>
      <h4><input type="username" name="username" placeholder="Username"></h4>
      <h5><input type="password" name="password" placeholder="Password"></h5>
      <h6><input type="submit" value="Create User"></h6>
