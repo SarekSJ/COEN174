@@ -2,13 +2,30 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
-<link rel="stylesheet" href="{{ url_for( filename='main.css') }}">
+#<link rel="stylesheet" href="{{ url_for( filename='main.css') }}">
+<style>
+h1 {
+    text-align:center;
+    color: black;
+    font-family: verdana;
+    font-size:20px;
+}
+h2 {
+    text-align:center;
+    color: black;
+    font-family: verdana;
+    font-size:20px;
+}
+h3 {
+    text-align:center;
+    color: black;
+    font-family: verdana;
+    font-size:20px;
+}
 <form action="/login" method="POST">
-    <div>
-        <input type="username" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" value="Log in">
-    </div>
+        <h1><input type="username" name="Username" placeholder="Username"></h1>
+        <h2><input type="password" name="Password" placeholder="Password"></h2>
+        <h3><input type="submit" value="Log in"></h3>
 </form>
 <form action="/add_user" method="POST">
     <p>New admin? Add your credentials here: </p>
