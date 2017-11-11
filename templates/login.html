@@ -2,6 +2,7 @@
 {% if session['logged_in'] %}
 <p>You're logged in already!</p>
 {% else %}
+<link rel="stylesheet" href="{{ url_for( filename='main.css') }}">
 <form action="/login" method="POST">
     <div>
         <input type="username" name="username" placeholder="Username">
