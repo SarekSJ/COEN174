@@ -44,7 +44,7 @@ h2 {
             
             {% if isLoggedIn %}
                 <a class="navbar-brand">
-                    Welcome <?php echo $_SESSION["username"];  ?>
+                    Welcome, {{ session["username"] }}!
                 </a>
            {% endif %}
         </div>
