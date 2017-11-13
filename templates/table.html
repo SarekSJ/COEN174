@@ -51,7 +51,12 @@ h2 {
         {% if isLoggedIn %}
             <form action="/logout">
 		    <h1><input type="submit" name="auth" value="Log Out" action="/logout"></h1>
-</form>
+            </form>
+            {% if session['admin'] %}
+                <form action="/new_user_screen" method="POST">
+                <h1><input type="submit" value="Add a new user?" action="/new_user_screen" method="POST"></h1>
+                </form>
+            {% endif %}
 	    {% else %}
    	<form action="/login_screen" method="POST">
              <h2><input type="submit" value="Log In as Admin" action="/login" method="POST"></h2>
@@ -62,7 +67,7 @@ h2 {
 
 <head>
     <meta charset="UTF-8">
-    <title>Table</title>
+    <title>Courses</title>
 </head>
 <body>
     <table>
@@ -75,6 +80,10 @@ h2 {
             <th>Advisor</th>
             <th>Description</th>
             <th>Date</th>
+            {% if isLoggedIn %}
+            <th>Delete</th>
+            <th>Edit</th>
+            {% endif %}
         </tr>
         {% for row in items %}
         <tr>
@@ -94,25 +103,34 @@ h2 {
               <form method="post" action="{{url_for('display_edit_page', id=row.id) }}">
                   <td><input type="submit" value="Edit Row"></td>
               </form>
-	      {% endif %}
+          {% endif %}
+
+          {% if isLoggedIn and row.advisor != session['username'] %}
+              <td></td>
+              <td></td>
+          {% endif %}
         </tr>
 
         {% endfor %}
-    </table>
-    {% if isLoggedIn %}
+        {% if isLoggedIn %}
     <form action="/add_row" method="POST">
 
-    <input type="school" name="school" placeholder="School">
-    <input type="country" name="country" placeholder="Country">
-    <input type="school_course" name="school_course" placeholder="School's Course">
-    <input type="scu_course" name="scu_course" placeholder="SCU Course">
-    <input type="determination" name="determination" placeholder="Approved or Denied?">
+    <td><input type="school" name="school" placeholder="School"></td>
+    <td><input type="country" name="country" placeholder="Country"></td>
+    <td><input type="school_course" name="school_course" placeholder="School's Course"></td>
+    <td><input type="scu_course" name="scu_course" placeholder="SCU Course"></td>
+    <td><input type="determination" name="determination" placeholder="Approved or Denied?"></td>
     <!-- <input type="radio" name="determination" id="approved" value="Approved" checked> Approved <br>
     //<input type="radio" name="determination" id="denied" value="Denied"> Denied <br> -->
-    <input type="description" name="description" placeholder="Please explain your rationale here.">
-    <input type="submit" value="Add row">
+    <td> Your username will automatically be recorded. </td>
+    <td><input type="description" name="description" placeholder="Please explain your rationale here."></td>
+    <td><input type="submit" value="Add row"></td>
+    <td></td>
+    <td></td>
     </form>
-	
+
     {% endif %}
+    </table>
+
 </body>
 </html>

@@ -92,12 +92,14 @@ div{
            <h2><input type="password" name="password" placeholder="Password"></h2>
            <h3><input type="submit" value="Log in"></h3>
     </form>
+    {% if session['admin'] %}
     <form action="/add_user" method="POST">
          <h7>New admin? Add your credentials here: </h7>
          <h4><input type="username" name="username" placeholder="Username"></h4>
         <h5><input type="password" name="password" placeholder="Password"></h5>
          <h6><input type="submit" value="Create User"></h6>
      </div>
+    {% endif %}
     </form>
 
     {% endif %}

@@ -23,6 +23,10 @@ def home():
 def show_login_screen():
     return render_template('login.html')
 
+@app.route('/new_user_screen', methods=['POST'])
+def show_add_user_screen():
+    return render_template('new_user_screen.html')
+
 @app.route('/login', methods=['POST'])
 def do_admin_login():
     POST_USERNAME = str(request.form['username'])
@@ -33,6 +37,8 @@ def do_admin_login():
     if result:
         session['username'] = POST_USERNAME
         session['logged_in'] = True
+        if (POST_USERNAME == 'Atkinson'):
+            session['admin'] = True
     else:
         flash('wrong password!')
     return home()
@@ -82,8 +88,6 @@ def add_user():
 
     s.add(User(POST_USERNAME, POST_PASSWORD))
     s.commit()
-    session['logged_in'] = True
-    session['username'] = POST_USERNAME
     return table_screen(True)
 
 @app.route("/display_edit_page/<int:id>", methods=['POST'])
