@@ -13,7 +13,7 @@ body {
 p {
     font-family: verdana;
     font-size: 60px;
-    text-align: left;
+    text-align: center;
     color: white;
     background-color: maroon;
 }
@@ -41,7 +41,7 @@ h4 {
     font-family: verdana;
     font-size:15px;
 }
-h5 {
+h5 {1
     text-align:center;
     color: black;
     font-family: verdana;
@@ -84,6 +84,7 @@ div{
     <p> SCU Course Equivalency System </p>
     {% if session['admin'] %}
     <form action="/add_user" method="POST">
+      <div>
          <h7>New admin? Add their credentials here: </h7>
          <h4><input type="username" name="username" placeholder="Username"></h4>
         <h5><input type="password" name="password" placeholder="Password"></h5>
