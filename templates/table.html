@@ -187,7 +187,16 @@ h2 {
   <!--<option value="coen70" >COEN 70</option>-->
 <!--</select>-->
 </div>
-
+<body>
+    <form method="post" action="{{ url_for('search_scu_course') }}">
+        <input type="query" name="search" placeholder="Search our SCU courses here">
+        <input type="submit" name="search_submit" value="Search">
+    </form>
+    {% if session['is_search'] %}
+        <form action="/table">
+            <input type="submit" name="back" value="Show all courses" >
+        </form>
+    {% endif %}
     <table>
         <tr>
             <th>School</th>
@@ -198,7 +207,7 @@ h2 {
             <th>Advisor</th>
             <th>Description</th>
             <th>Date</th>
-            {% if isLoggedIn %}
+            {% if session['logged_in'] %}
             <th>Delete</th>
             <th>Edit</th>
             {% endif %}
@@ -213,7 +222,7 @@ h2 {
               <td>{{ row.advisor}}</td>
               <td>{{ row.description }}</td>
               <td>{{ row.date }}  </td>
-	      {% if isLoggedIn and row.advisor == session['username'] %}
+	      {% if session['logged_in'] and row.advisor == session['username'] %}
 
               <form method="post" action="{{url_for('delete_row', id=row.id) }}">
               <td><input type="submit" value="Delete Row"></td>
@@ -223,14 +232,14 @@ h2 {
               </form>
           {% endif %}
 
-          {% if isLoggedIn and row.advisor != session['username'] %}
+          {% if session['logged_in'] and row.advisor != session['username'] %}
               <td></td>
               <td></td>
           {% endif %}
         </tr>
 
         {% endfor %}
-        {% if isLoggedIn %}
+        {% if session['logged_in'] %}
     <form action="/add_row" method="POST">
 
     <td><input type="school" name="school" placeholder="School"></td>

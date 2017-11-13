@@ -106,12 +106,21 @@ def display_edit_page(id):
 
 @app.route('/table')
 def table_screen(isLoggedIn=False):
+    session['is_search'] = False
     if not session.get('logged_in'):
         isLoggedIn = False
     else:
         isLoggedIn = True
     items = s.query(Course).all()
     return render_template('table.html', items=items, isLoggedIn=isLoggedIn)
+
+@app.route('/table/search_scu_course/', methods=['POST'])
+def search_scu_course(isLoggedIn=false):
+    search = str(request.form['search'])
+    session['is_search'] = True
+    items = s.query(Course).filter(Course.scu_course == search).all()
+    return render_template('table.html', items=items)
+
 
 if __name__ == '__main__':
     app.secret_key = os.urandom(12)
