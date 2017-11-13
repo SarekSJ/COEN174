@@ -42,7 +42,7 @@ schools['Tanzania'] = new Array('','school1');
 schools['Thailand'] = new Array('','school1');
 schools['Turkey'] = new Array('','school1');
 schools['United Kingdom'] = new Array('','school1');
-schools['United States of America'] = new Array('','school1');
+schools['United States of America'] = new Array('','Gonzaga University', 'Saint Edwards University', 'San Jose State University');
 schools['Vietnam'] = new Array('','school1');
 
 var courses = new Array();
@@ -218,7 +218,9 @@ course['United Kingdom']['school1'] = new Array('','course1','course2');
 
 course['United States of America'] = new Array();
 course['United States of America'][''] = new Array('');
-course['United States of America']['school1'] = new Array('','course1','course2');
+course['United States of America']['Gonzaga University'] = new Array('','CS 145');
+course['United States of America']['Saint Edwards University'] = new Array('','MATH 2');
+course['United States of America']['San Jose State'] = new Array('','RLGN 345');
 
 course['Vietnam'] = new Array();
 course['Vietnam'][''] = new Array('');
