@@ -60,6 +60,7 @@ def add_row(isLoggedIn=False):
 @app.route("/logout")
 def logut():
     session['logged_in'] = False
+    session['admin'] = False
     return home()
 
 
@@ -69,15 +70,18 @@ def delete_row(id, isLoggedIn=false):
     s.commit()
     return redirect(url_for('table_screen'))
 
-@app.route("/edit/<int:id>", methods=['POST'])
+@app.route("/table/edit/<int:id>", methods=['POST'])
 def edit_row(id, isLoggedIn=false):
     POST_SCHOOL = str(request.form['school'])
     POST_SCHOOL_COURSE = str(request.form['school_course'])
     POST_SCU_COURSE = str(request.form['scu_course'])
     POST_DETERMINATION = str(request.form['determination'])
     POST_ADVISOR = str(request.form['advisor'])
+    POST_DESCRIPTION = str(request.form['description'])
 
-    s.query(Course).filter(Course.id == id).update({"school": POST_SCHOOL, "school_course": POST_SCHOOL_COURSE, "scu_course": POST_SCU_COURSE, "determination": POST_DETERMINATION, "advisor": POST_ADVISOR})
+    s.query(Course).filter(Course.id == id).update({"school": POST_SCHOOL, "school_course": POST_SCHOOL_COURSE,
+                                                    "scu_course": POST_SCU_COURSE, "determination": POST_DETERMINATION,
+                                                    "advisor": POST_ADVISOR, "date":datetime.now(), "description": POST_DESCRIPTION})
     s.commit()
     return redirect(url_for('table_screen'))
 
@@ -92,11 +96,13 @@ def add_user():
 
 @app.route("/display_edit_page/<int:id>", methods=['POST'])
 def display_edit_page(id):
-    row = s.query(Course).filter(Course.id == id).one()
+    r = s.query(Course).filter(Course.id == id).one()
+
     advisors = s.query(User).all()
+    items = s.query(Course).all()
     # for advisor in advisors:
     #     print(advisor['username'])
-    return render_template('edit_row.html', row=row, advisors=advisors)
+    return render_template('edit_row.html', r=r, items=items, advisors=advisors, isLoggedIn=True)
 
 @app.route('/table')
 def table_screen(isLoggedIn=False):
@@ -110,7 +116,3 @@ def table_screen(isLoggedIn=False):
 if __name__ == '__main__':
     app.secret_key = os.urandom(12)
     app.run(host='0.0.0.0', port=8000)
-
-
-# if __name__ == '__main__':
-#     app.run()
