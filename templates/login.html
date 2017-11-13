@@ -1,12 +1,14 @@
+<html>
 <style>
 h10 {
     font-family: verdana;
     font-size: 25px;
     text-align: center;
     color: black;
-    }   
+}   
 body {
-    background-image: url("santa-clara-palm-drive.jpg");
+    background-image: url('santa-clara-palm-drive.png');
+    background-repeat: no-repeat;
 } 
 p {
     font-family: verdana;
@@ -79,24 +81,25 @@ div{
     
 </style>
 <body>
-<p> SCU Course Equivalency System </p>
-{% if session['logged_in'] %}
-<h10>You're logged in already!</h10>
-{% else %}
-<form action="/login" method="POST">
-    <div>
-        <h10>Login</h10>
-        <h1><input type="username" name="username" placeholder="Username"></h1>
-        <h2><input type="password" name="password" placeholder="Password"></h2>
-        <h3><input type="submit" value="Log in"></h3>
-</form>
-<form action="/add_user" method="POST">
-    <h7>New admin? Add your credentials here: </h7>
-     <h4><input type="username" name="username" placeholder="Username"></h4>
-     <h5><input type="password" name="password" placeholder="Password"></h5>
-     <h6><input type="submit" value="Create User"></h6>
-   </div>
-</form>
+    <p> SCU Course Equivalency System </p>
+    {% if session['logged_in'] %}
+    <h10>You're logged in already!</h10>
+    {% else %}
+    <form action="/login" method="POST">
+      <div>
+            <h10>Login</h10>
+           <h1><input type="username" name="username" placeholder="Username"></h1>
+           <h2><input type="password" name="password" placeholder="Password"></h2>
+           <h3><input type="submit" value="Log in"></h3>
+    </form>
+    <form action="/add_user" method="POST">
+         <h7>New admin? Add your credentials here: </h7>
+         <h4><input type="username" name="username" placeholder="Username"></h4>
+        <h5><input type="password" name="password" placeholder="Password"></h5>
+         <h6><input type="submit" value="Create User"></h6>
+     </div>
+    </form>
 
-{% endif %}
+    {% endif %}
 </body>
+</html>
