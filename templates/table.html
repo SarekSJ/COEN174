@@ -67,131 +67,28 @@ h2 {
 
 <head>
     <meta charset="UTF-8">
-    <!--<script type="text/javascript" src="table.js"></script>-->
-    <!--<script type="text/javascript" src="dropdown.js"></script>-->
     <title>Courses</title>
 </head>
-<!--<body>-->
-	 <!--<input type="text" id="input" onkeyup="search()" placeholder="Search..">-->
-    <!--<div class="form">-->
-<!--<label for="country">Country</label>-->
-<!--<select name="country" id="country" onchange="setSchool();">-->
-        <!--<option value=""></option>  -->
-  <!---->
-		<!--<option value="Argentina">Argentina</option>-->
 
-		<!--<option value="Australia" >Australia</option>-->
-		 <!---->
-        <!--<option value="Austria" >Austria</option>-->
-		 <!---->
-        <!--<option value="Belgium" >Belgium</option>-->
-		 <!---->
-        <!--<option value="Bhutan" >Bhutan</option>-->
-		 <!---->
-        <!--<option value="Botswana" >Botswana</option>-->
-		 <!---->
-        <!--<option value="Cambodia" >Cambodia</option>-->
-		 <!---->
-        <!--<option value="Chile" >Chile</option>-->
-		 <!---->
-        <!--<option value="China" >China</option> Kingdom-->
-		 <!---->
-        <!--<option value="Costa Rica" >Costa Rica</option>-->
-		 <!---->
-        <!--<option value="Czech Republic" >Czech Republic</option>-->
-		 <!---->
-        <!--<option value="Denmark" >Denmark</option>-->
-		 <!---->
-        <!--<option value="Dominican Republic" >Dominican Republic</option>-->
-		 <!---->
-        <!--<option value="Ecuador" >Ecuador</option>-->
-		 <!---->
-        <!--<option value="El Salvador" >El Salvador</option>-->
-		 <!---->
-        <!--<option value="France" >France</option>-->
-		 <!---->
-        <!--<option value="Germany" >Germany</option>-->
-		 <!---->
-        <!--<option value="Ghana" >Ghana</option>-->
-		 <!---->
-        <!--<option value="Greece" >Greece</option>-->
-		 <!---->
-        <!--<option value="Iceland" >Iceland</option>-->
-		 <!---->
-        <!--<option value="India" >India</option>-->
-		 <!---->
-        <!--<option value="Ireland" >Ireland</option>-->
-		 <!---->
-        <!--<option value="Italy" >Italy</option>-->
-		 <!---->
-        <!--<option value="Japan" >Japan</option>-->
-		 <!---->
-        <!--<option value="Morocco" >Morocco</option>-->
-		 <!---->
-        <!--<option value="Netherlands" >Netherlands</option>-->
-		 <!---->
-        <!--<option value="New Zealand" >New Zealand</option>-->
-		 <!---->
-        <!--<option value="Nicaragua" >Nicaragua</option>-->
-		 <!---->
-        <!--<option value="Panama" >Panama</option>-->
-		 <!---->
-        <!--<option value="Peru" >Peru</option>-->
-		 <!---->
-        <!--<option value="Rwanda" >Rwanda</option>-->
-		 <!---->
-        <!--<option value="Singapore" >Singapore</option>-->
-		 <!---->
-        <!--<option value="South Africa" >South Africa</option>-->
-		 <!---->
-        <!--<option value="South Korea" >South Korea</option>-->
-		 <!---->
-        <!--<option value="Spain" >Spain</option>-->
-		 <!---->
-        <!--<option value="Sweden" >Sweden</option>-->
-		 <!---->
-        <!--<option value="Switzerland" >Switzerland</option>-->
-		 <!---->
-        <!--<option value="Taiwan" >Taiwan</option>-->
-		 <!---->
-        <!--<option value="Tanzania" >Tanzania</option>-->
-		 <!---->
-        <!--<option value="Thailand" >Thailand</option>-->
-		 <!---->
-        <!--<option value="Turkey" >Turkey</option>-->
-  <!---->
-        <!--<option value="United Kingdom" >Turkey</option>-->
-		 <!---->
-        <!--<option value="United States of America" >USA</option>-->
-		 <!---->
-        <!--<option value="Vietnam" >Vietnam</option>-->
-    <!--</select>-->
-
-
-<!--<label for="school">School</label>-->
-<!--<select name="schools" id="schools" onchange="setCourses();">-->
-  <!--<option value="">Please select a Country</option>-->
-<!--</select>-->
-
-<!--<label for="course">Course</label>-->
-<!--<select name="course"  id="course">-->
-  <!--<option value="">Please select a Country</option>-->
-<!--</select>-->
-  <!---->
-<!--<label for="scu_course">SCU Course</label>-->
-<!--<select name="scu_course"  id="scu_course">-->
-  <!--<option value="" ></option>-->
-  <!--<option value="coen10" >COEN 10</option>-->
-  <!--<option value="coen11" >COEN 11</option>-->
-  <!--<option value="coen12" >COEN 12</option>-->
-  <!--<option value="coen70" >COEN 70</option>-->
-<!--</select>-->
 </div>
 <body>
-    <form method="post" action="{{ url_for('search_scu_course') }}">
+    <form method="POST" action="{{ url_for('search_scu_course') }}">
         <input type="query" name="search" placeholder="Search our SCU courses here">
+        <select name = "country" method="POST">
+        {% for country in countries %}
+        <option value = "{{ country }} ">{{country}}</option>
+        {% endfor %}
+        <option value = "" SELECTED>Country</option>
+        </select>
+        <select name="school" method="POST">
+            {% for school in schools %}
+            <option value="{{school}}">{{school}}</option>
+            {% endfor %}
+            <option value="" SELECTED> School </option>
+        </select>
         <input type="submit" name="search_submit" value="Search">
     </form>
+
     {% if session['is_search'] %}
         <form action="/table">
             <input type="submit" name="back" value="Show all courses" >

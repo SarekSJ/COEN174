@@ -112,14 +112,33 @@ def table_screen(isLoggedIn=False):
     else:
         isLoggedIn = True
     items = s.query(Course).all()
-    return render_template('table.html', items=items, isLoggedIn=isLoggedIn)
+    countries = []
+    for country in s.query(Course).distinct(Course.country):
+        if country.country not in countries:
+            countries.append(country.country)
+    schools = []
+    for school in s.query(Course).distinct(Course.school):
+        if school.school not in schools:
+            schools.append(school.school)
+    return render_template('table.html', items=items, countries = countries, schools=schools, isLoggedIn=isLoggedIn)
 
 @app.route('/table/search_scu_course/', methods=['POST'])
 def search_scu_course(isLoggedIn=false):
     search = str(request.form['search'])
+    count = str(request.form['country']).strip()
+    scho = str(request.form['school'])
+    countries = []
+    for country in s.query(Course).distinct(Course.country):
+        if country.country not in countries:
+            countries.append(country.country)
+    schools = []
+    for school in s.query(Course).distinct(Course.school):
+        if school.school not in schools:
+            schools.append(school.school)
     session['is_search'] = True
-    items = s.query(Course).filter(Course.scu_course == search).all()
-    return render_template('table.html', items=items)
+    items = s.query(Course).filter(or_(Course.scu_course.like(search), Course.country.like(count),
+                                   Course.school.like(scho))).all()
+    return render_template('table.html', items=items, countries = countries, schools=schools)
 
 
 if __name__ == '__main__':
