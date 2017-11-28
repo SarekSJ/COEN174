@@ -29,7 +29,7 @@ def show_add_user_screen():
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
-    POST_USERNAME = str(request.form['username'])
+    POST_USERNAME = str(request.form['username']).strip()
     POST_PASSWORD = str(request.form['password'])
 
     query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]))
@@ -45,12 +45,12 @@ def do_admin_login():
 
 @app.route('/add_row', methods=['POST'])
 def add_row(isLoggedIn=False):
-    POST_SCHOOL = str(request.form['school']).strip().upper()
-    POST_COUNTRY = str(request.form['country']).strip().upper()
+    POST_SCHOOL = str(request.form['school']).strip()
+    POST_COUNTRY = str(request.form['country']).strip()
     POST_SCHOOL_COURSE = str(request.form['school_course']).strip().upper()
     POST_SCU_COURSE = str(request.form['scu_course']).strip().upper()
-    POST_DETERMINATION = str(request.form['determination']).strip().upper()
-    POST_DESCRIPTION = str(request.form['description']).strip().upper()
+    POST_DETERMINATION = str(request.form['determination']).strip()
+    POST_DESCRIPTION = str(request.form['description']).strip()
 
     s.add(Course(POST_SCHOOL, POST_COUNTRY,POST_SCHOOL_COURSE, POST_SCU_COURSE, POST_DETERMINATION, session['username'], datetime.now(), POST_DESCRIPTION))
     s.commit()
@@ -71,12 +71,12 @@ def delete_row(id, isLoggedIn=false):
 
 @app.route("/table/edit/<int:id>", methods=['POST'])
 def edit_row(id, isLoggedIn=false):
-    POST_SCHOOL = str(request.form['school']).strip().upper()
+    POST_SCHOOL = str(request.form['school']).strip()
     POST_SCHOOL_COURSE = str(request.form['school_course']).strip().upper()
     POST_SCU_COURSE = str(request.form['scu_course']).strip().upper()
-    POST_DETERMINATION = str(request.form['determination']).strip().upper()
-    POST_ADVISOR = str(request.form['advisor']).strip().upper()
-    POST_DESCRIPTION = str(request.form['description']).strip().upper()
+    POST_DETERMINATION = str(request.form['determination']).strip()
+    POST_ADVISOR = str(request.form['advisor']).strip()
+    POST_DESCRIPTION = str(request.form['description']).strip()
 
     s.query(Course).filter(Course.id == id).update({"school": POST_SCHOOL, "school_course": POST_SCHOOL_COURSE,
                                                     "scu_course": POST_SCU_COURSE, "determination": POST_DETERMINATION,
@@ -86,7 +86,7 @@ def edit_row(id, isLoggedIn=false):
 
 @app.route("/add_user", methods=['POST'])
 def add_user():
-    POST_USERNAME = str(request.form['username']).strip().upper()
+    POST_USERNAME = str(request.form['username']).strip()
     POST_PASSWORD = str(request.form['password'])
 
     s.add(User(POST_USERNAME, POST_PASSWORD))
@@ -124,8 +124,8 @@ def table_screen(isLoggedIn=False):
 @app.route('/table/search_scu_course/', methods=['POST'])
 def search_scu_course(isLoggedIn=false):
     search = str(request.form['search']).strip().upper()
-    count = str(request.form['country']).strip().upper()
-    scho = str(request.form['school']).strip().upper()
+    count = str(request.form['country']).strip()
+    scho = str(request.form['school']).strip()
     countries = []
     for country in s.query(Course).distinct(Course.country):
         if country.country not in countries:

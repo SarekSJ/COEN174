@@ -143,9 +143,13 @@ h2 {
     <td><input type="country" name="country" placeholder="Country"></td>
     <td><input type="school_course" name="school_course" placeholder="School's Course"></td>
     <td><input type="scu_course" name="scu_course" placeholder="SCU Course"></td>
-    <td><input type="determination" name="determination" placeholder="Approved or Denied?"></td>
-    <!-- <input type="radio" name="determination" id="approved" value="Approved" checked> Approved <br>
-    //<input type="radio" name="determination" id="denied" value="Denied"> Denied <br> -->
+    <!--<td><input type="determination" name="determination" placeholder="Approved or Denied?"></td>-->
+    <td>
+    <select name="advisor" method="POST">
+        <option value="Rejected">Rejected</option>
+        <option value="Approved" SELECTED> Approved </option>
+    </select>
+    </td>
     <td> Your username will automatically be recorded. </td>
     <td><input type="description" name="description" placeholder="Please explain your rationale here."></td>
     <td><input type="submit" value="Add row"></td>
